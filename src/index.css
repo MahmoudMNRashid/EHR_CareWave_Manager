@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.divgrid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  padding: 20px;
+  gap: 15px 15px;
+  place-items: center;
+}
+
+
+body {
+  margin: 0;
+  /* background-color: #3f3f3f; */
+}
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: rgb(64, 77, 109)
+    
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: rgb(36 41 52);
+    border-radius: 10px;
+    ;
+  }

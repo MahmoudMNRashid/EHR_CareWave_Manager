@@ -25,7 +25,7 @@ export const RootLayoutAsst = () => {
             path: 'DeleteDoctorAccount',
         },
         {
-            name: 'تغيير كلمة المرور',
+            name: 'تغيير رقم الموبايل',
             path: 'ChangePass'
         },
         {

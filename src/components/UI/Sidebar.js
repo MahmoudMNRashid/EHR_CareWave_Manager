@@ -3,7 +3,7 @@ import {  NavLink } from 'react-router-dom'
 import classes from './Sidebar.module.css'
 
 export const Sidebar = (props) => {
-    console.log(props.np); 
+
     return (
       
         <div className={`${classes.sidebar} ${props.className}`}>
@@ -12,7 +12,7 @@ export const Sidebar = (props) => {
            props.np.map((item)=>{
 
                  return(
-                    <NavLink to={item.path} className={({ isActive }) =>
+                    <NavLink  key={Math.random()} to={item.path} className={({ isActive }) =>
                     isActive ? `${classes.active} ${classes.nav}` : classes.nav
                 }>
                     {item.name}

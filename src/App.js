@@ -10,9 +10,10 @@ import { DoctorsSearchName } from "./pages/Manager/DoctorsSearchName";
 import { AddTips } from "./pages/Manager/AddTips";
 import { RootLayoutAsst } from "./pages/Asst_Manger/RootLayoutAsst";
 import { VerifyDoctorAccount } from "./pages/Asst_Manger/VerifyDoctorAccount";
-import {ChangePass} from './pages/Asst_Manger/ChangePass';
+import {ChangeNumber} from './pages/Asst_Manger/ChangeNumber';
 import { UpgradeAccount } from "./pages/Asst_Manger/UpgradeAccount";
-import {DeleteDoctorAccount} from './pages/Asst_Manger/DeleteDoctorAccount'
+import { DeleteAccountDoctor } from "./pages/Manager/DeleteAccountDoctor";
+
 
 
 const router = createBrowserRouter([
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
           { index:true, element: <MedicalTips />, }
           , { path: 'AddTips', element: <AddTips /> }]
       },
+      { path: 'DeleteAccountDoctor', element: <DeleteAccountDoctor /> },
 
       { path: 'DoctorsSearchName', element: <DoctorsSearchName /> },
       { path: 'DoctorSearchIdSyr', element: <DoctorSearchIdSyr /> },
@@ -46,8 +48,7 @@ const router = createBrowserRouter([
     children: [
       { path: 'VerifyDoctorAccount', element: <VerifyDoctorAccount/> },
       { path: 'UpgradeAccount', element: <UpgradeAccount/> },
-      { path: 'DeleteDoctorAccount', element: <DeleteDoctorAccount/> },
-      { path: 'ChangePass', element: <ChangePass /> },
+      { path: 'ChangeNumber', element: <ChangeNumber /> },
 
 
     ]

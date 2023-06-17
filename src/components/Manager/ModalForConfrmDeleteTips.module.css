@@ -1,0 +1,113 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 20;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.modal {
+    position: fixed;
+    top: 12vh;
+    left: 5%;
+    width: 90%;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    z-index: 30;
+    animation: slide-down 300ms ease-out forwards;
+    overflow: hidden;
+  
+}
+
+@media (min-width: 768px) {
+    .modal {
+        width: 40rem;
+        left: calc(50% - 20rem);
+    }
+}
+
+@keyframes slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-3rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ____________________________________________________________________ */
+.first {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-bottom: 2px solid #ebecef;
+    padding: 10PX;
+}
+
+.heading {
+    font-size: 24px;
+    color: #ff4f4f  ;
+    font-weight: bold;
+    display: block;
+}
+/* ____________________________________________________________________ */
+.second {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-bottom: 2px solid #ebecef;
+   gap: 20px;
+    padding: 20PX;
+}
+.second >div{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: fit-content  ;
+   
+}
+.second >div>div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap:20px ;
+}
+.second >div>div span{
+    font-weight: 600;
+    font-size: 20px;
+}
+.second >div>div p{
+    font-weight: 400;
+    font-size: 20px;
+}
+/* ______________________________________________________________ */
+
+.third{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid #ebecef;
+    padding: 20PX;  
+    gap: 20px;
+}
+.btn {
+
+    display: block;
+    padding: 0.90em;
+    overflow: hidden;
+    color: whitesmoke;
+    border: 2px solid #ff4f4f;
+    border-radius: 10px;
+    position: relative;
+    background-color: #ff4f4f;
+
+}
+/* ______________________________________________________ */

@@ -94,6 +94,12 @@
     border: none;
     outline: none;
 }
+.button:disabled,
+.button:disabled:hover,
+.button:disabled:active {
+    
+    cursor: not-allowed;
+}
 @media (max-width:567px) {
     .button {
         width: 100%;
@@ -114,3 +120,8 @@
     }
     
 }
+
+.invalid  {
+    border: 1px solid #ff4f4f;
+    /* background-color: #fddddd; */
+  }

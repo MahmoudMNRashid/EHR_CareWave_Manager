@@ -1,19 +1,21 @@
 import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigation } from 'react-router-dom'
 import classes from './RootLayoutAsst.module.css'
 import { Sidebar } from '../../components/UI/Sidebar'
 import { Nav } from '../../components/UI/Nav'
+import LoadingBar from 'react-top-loading-bar'
 
+ 
 export const RootLayoutAsst = () => {
-
+    const navigation = useNavigation();
     const svgPartOne = [
         {
             icon: <svg className="w-7 h-7 stroke-current" xmlns="http://www.w3.org/2000/svg" width="700pt" height="700pt" version="1.1" viewBox="0 0 700 700">
             <g>
-             <path fill='white' d="m253.84 303.43c-60.887 1.168-120.7 19.02-172.45 49.859l-11.391 6.7891v129.93h373.33v-129.43l-10.711-6.8828c-55.934-35.93-117.9-51.438-178.78-50.266z" fill-rule="evenodd"/>
+             <path fill='white' d="m253.84 303.43c-60.887 1.168-120.7 19.02-172.45 49.859l-11.391 6.7891v129.93h373.33v-129.43l-10.711-6.8828c-55.934-35.93-117.9-51.438-178.78-50.266z" fillRule="evenodd"/>
              <path fill='white' d="m256.67 70c-51.27 0-93.332 42.062-93.332 93.332s42.062 93.332 93.332 93.332 93.332-42.062 93.332-93.332-42.062-93.332-93.332-93.332z"/>
-             <path fill='white' d="m575.5 139.98-112.16 100.67-35.5-31.902-31.172 34.77 66.672 59.793 143.33-128.56z" fill-rule="evenodd"/>
+             <path fill='white' d="m575.5 139.98-112.16 100.67-35.5-31.902-31.172 34.77 66.672 59.793 143.33-128.56z" fillRule="evenodd"/>
             </g>
            </svg>,
             explanation: 'تأكيد حساب طبيب',
@@ -29,7 +31,7 @@ export const RootLayoutAsst = () => {
 
             </g>
            </svg>,
-            explanation: 'تغيير رقم الموبايل',
+            explanation: 'تغيير كلمة المرور',
             path: 'ChangeNumber'
         },
        
@@ -49,7 +51,7 @@ export const RootLayoutAsst = () => {
         {
             icon: <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill='white' d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C15.2713 2 18.1757 3.57078 20.0002 5.99923L17.2909 5.99931C15.8807 4.75499 14.0285 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C14.029 20 15.8816 19.2446 17.2919 17.9998L20.0009 17.9998C18.1765 20.4288 15.2717 22 12 22ZM19 16V13H11V11H19V8L24 12L19 16Z"></path></svg>,
             explanation: 'تسجيل الخروج',
-            path:'/'
+            path:'../../logout'
           },
     ]
 
@@ -65,12 +67,12 @@ export const RootLayoutAsst = () => {
 
         },
         {
-            name: 'تغيير رقم الموبايل',
+            name: 'تغيير كلمة المرور',
             path: 'ChangeNumber'
         },
         {
             name: 'تسجيل الخروج',
-            path: '/'
+            path: '../../logout'
         }
     ]
     return (
@@ -84,6 +86,9 @@ export const RootLayoutAsst = () => {
                     <Outlet />
                 </Col>
             </Row>
+            {
+        navigation.state==='loading' && <LoadingBar color='#f11946'  progress={100} height={5}  loaderSpeed={15000} transitionTime={15000} />
+            }
         </Container>
     )
 }

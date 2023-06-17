@@ -1,24 +1,52 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form } from 'react-bootstrap'
 import classes from './DeleteAccountDoctorForm.module.css'
 export const DeleteAccountDoctorForm = (props) => {
+  const [enteredName, setEnteredName] = useState('');
+  const [enteredNameTouched, setEnteredNameTouched] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const enteredNameIsValid = enteredName.trim() !== '';
+  const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
+ console.log(props.a)
+  let formIsValid = false;
 
-  const h = (e)=>{
-    e.preventDefault()
-    props.onClick()
-
+  if (enteredNameIsValid) {
+    formIsValid = true;
   }
+  const nameInputChangeHandler = (event) => {
+    setEnteredName(event.target.value);
+  };
+
+  const nameInputBlurHandler = (event) => {
+    setEnteredNameTouched(true);
+  };
+
+
+ 
+ 
+ 
   return (
-    <form className={classes.form_}>
+    <div className={classes.form_}>
     <Form.Group className="mb-3" controlId="formBasicText">
-      <Form.Label className={classes.label_}> الرقم الوطني</Form.Label>
-      <Form.Control  className={classes.input_} type="text" placeholder="ادخل الرقم الوطني"  />      
+     
+      <Form.Control
+        className={classes.input_}
+         type="text"
+          placeholder="ادخل الرقم الوطني"
+          onChange={nameInputChangeHandler}
+          onBlur={nameInputBlurHandler}
+          value={enteredName}
+          isInvalid={nameInputIsInvalid}
+            />      
     </Form.Group>
 
-    <button variant="primary"  className={classes.button} onClick={h}  >
-     تغيير
+    <button onClick={()=>{
+      props.a(enteredName)
+      props.onClick()
+    }} disabled={!formIsValid} variant="primary"  className={classes.button}   >
+     حذف
     </button>
-
-  </form>
+    
+  </div>
   )
 }

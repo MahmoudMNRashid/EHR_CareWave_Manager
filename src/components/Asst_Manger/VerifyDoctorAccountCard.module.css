@@ -1,6 +1,6 @@
-.big{
+.big {
     color: whitesmoke;
-    display: flex ;
+    display: flex;
     flex-wrap: wrap;
     /* background-color: aqua; */
     width: fit-content;
@@ -15,32 +15,34 @@
 
 
 
-.grid{
-   height: 100%; 
-display: grid;
-place-items: center;
-grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+.grid {
+    height: 100%;
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
 
- gap: 15px 15px; 
- place-content: center; 
+    gap: 15px 15px;
+    place-content: center;
+
 }
 
 
 
 
-.left{
+.left {
     width: 300px;
     display: flex;
     flex-direction: column;
-    justify-content:space-around;
+    justify-content: space-around;
     align-items: center;
     gap: 20px;
     
-    
+
+
 }
 
 
-.textcontainer{
+.textcontainer {
     color: whitesmoke;
 
     display: flex;
@@ -49,51 +51,58 @@ grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
     justify-content: center;
     gap: 20px;
 }
-.text{
+
+.text {
     font-size: 22px;
     letter-spacing: 0.5px;
-    
+
 }
 
 
-.right{
+.right {
     width: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin: 20px;
 
 }
 
 
-.divimg{
+.divimg {
 
-display: flex;
-justify-content: center;
-align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 300px;
     height: 200px;
+    /* border-radius: 20px; */
+    overflow: hidden;
     /* height: 300px; */
     /* border-bottom: 2px solid pink; */
-    
+
 }
 
 
-.img{
-    
-    max-width:100%
+.img {
+
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: 5px;
+    aspect-ratio: 16/9;
 }
 
-.buttoncontainer{
+.buttoncontainer {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    
+
 }
 
-.button{
-   width: 200px;
-   height: 60px;
+.button {
+    width: 200px;
+    height: 60px;
     color: whitesmoke;
     font-weight: 400;
     font-size: 18px;
@@ -108,41 +117,49 @@ align-items: center;
 
 
 @media (max-width:767px) {
-    .big{
+    .big {
         width: 300px;
         border-radius: 10px;
         align-items: center;
         justify-content: center;
         gap: 30px;
     }
-    .right{
+
+    .right {
         order: 1;
     }
-    .left{
+
+    .left {
         order: 2;
     }
-    .button{
+
+    .button {
         height: 40px;
         font-size: 15px;
         width: 275px;
     }
-    .text{
+
+    .text {
         font-size: 20px;
     }
-    .textcontainer{
+
+    .textcontainer {
         padding-bottom: 10px;
 
     }
-    .left{
-        gap:30px ;
+
+    .left {
+        gap: 30px;
     }
-    .divimg{
+
+    .divimg {
         height: 175px;
     }
-    .buttoncontainer{
+
+    .buttoncontainer {
         margin-bottom: 20px;
     }
-  
-   
-    
+
+
+
 }

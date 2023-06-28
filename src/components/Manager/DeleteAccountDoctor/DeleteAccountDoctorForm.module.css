@@ -1,0 +1,34 @@
+.container{
+    padding: 20px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* gap: 20px; */
+
+}
+.container>div:nth-child(1){
+    color: black;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    
+}
+
+.container >div:nth-child(2){
+    display: flex;
+    gap: 20px;
+}
+.container >div:nth-child(2) button {
+    color: lightslategray;
+}
+
+.container >div:nth-child(2) button:disabled,
+.container >div:nth-child(2) button:disabled:active {
+    cursor: not-allowed;
+}

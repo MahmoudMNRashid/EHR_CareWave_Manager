@@ -1,17 +1,23 @@
 .col1 {
     padding: 0px;
     background-color: whitesmoke;
-   position: relative;
-   
-    
+    position: relative;
+
+
     /* min-height: 100vh; */
 
+}
+
+.svg{
+ position: absolute;
+ bottom: 0;
+    
 }
 
 .col2 {
     padding: 0;
     position: relative;
-    background-color: rgb(36 41 52);
+    background-color: #d6d6d6;
 }
 
 .row {
@@ -41,13 +47,11 @@
     .minisidebar {
         display: flex;
         width: 100%;
-        background: #606c88;
-        background: -webkit-linear-gradient(to right, #3f4c6b, #606c88);
-        background: linear-gradient(to right, #3f4c6b, #606c88);
+        background-color: #151726;
         height: 100vh;
         position: sticky;
         top: 0;
-    
+
     }
 
     .bigsidebar {

@@ -1,41 +1,48 @@
 .sidebar {
   height: 660px;
   width: 100%;
-  border-radius: 21px;
-  background-color: whitesmoke;
+  border-radius: 5px;
+  background-color: #18191b;
+  background-color: #151726;
 
-  /* background-color: red  ; */
+
+
+
 }
 
 
 
 
 .active {
-  color: white !important;
+  color: #151726 !important;
   /* text-decoration: underline; */
-  background: #606c88;
+  background: #77ffab;
 }
 
 
 .nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   text-decoration: none;
-  color: rgb(36 41 52);
-  font-size: 15px;
-  font-weight:lighter;
+  color: #aaacc2;
+  font-size: 12px;
+  font-weight: lighter;
   letter-spacing: 0;
   line-height: 20px;
   width: 100%;
   border-radius: 5px;
   cursor: pointer;
   padding: 15px;
-
-  text-align: center;
-  border-bottom: 1px solid #e0e0e0;
+  /* text-align: center; */
+  /* border-bottom: 1px solid #e0e0e0; */
 
 
 }
 
+
+
 .nav:hover {
-  color: white;
-  background: #606c88;
+  color: #151726;
+  background: #77ffab;
 }

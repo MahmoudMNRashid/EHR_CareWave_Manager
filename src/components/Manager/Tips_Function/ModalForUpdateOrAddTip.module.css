@@ -1,0 +1,74 @@
+.container {
+    background-color: white;
+    border-radius: 12px;
+    width: 300px;
+    /* height: 275px; */
+    position: fixed;
+    top: 30%;
+    left: 40%;
+    /* width: 90%; */
+    z-index: 10;
+    box-shadow: 1px 1px 10px lightslategray;
+    padding: 20px;
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    gap: 8px;
+
+}
+
+.ps {
+
+
+    align-self: flex-start;
+    /* justify-self: flex-start; */
+    font-size: 1rem;
+    line-height: 2rem;
+    font-weight: 900;
+    letter-spacing: -0.025em;
+    color: black;
+
+
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.buttons {
+    margin-top: 20px;
+    gap: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.buttons>button:nth-child(1):disabled,
+.buttons>button:nth-child(1):disabled:hover,
+.buttons>button:nth-child(1):disabled:active {
+
+    cursor: not-allowed;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+}
+
+.password {
+    font-size: 0.9rem;
+}
+
+.textarea {
+    border-radius: 8px;
+    height: 100px;
+    width: 100%;
+    resize: none;
+    outline: 0;
+    padding: 8px 14px;
+}

@@ -1,22 +1,108 @@
-import React from 'react'
-import { TipsCard } from '../../components/Manager/TipsCard'
-import { Button } from '../../components/UI/Button'
+import React, { useEffect, useState } from 'react'
+
 import { ToastContainer, toast } from 'react-toastify';
-import s from '../../components/Manager/TipsCard.module.css'
 import { getToken } from '../../Util/Auth';
-import { useLoaderData, useNavigate } from 'react-router-dom';
 
+import { TipCard } from '../../components/Manager/Tips_Function/TipCard';
+import { ButtonAdd } from '../../components/Manager/Tips_Function/ButtonAdd';
+import { ModalForUpdateOrAddTip } from '../../components/Manager/Tips_Function/ModalForUpdateOrAddTip';
+import nothing from '../../style/nothing (1).png'
+import { Bars } from 'react-loader-spinner';
 export const MedicalTips = () => {
-  const tips = useLoaderData();
-const nav = useNavigate
+ 
 
-  console.log('this')
+  const [ModalUpdateOrAddTipIsOpen, setModalUpdateOrAddTipIsOpen] = useState(false)
+  const handleCloseModalUpdateOrAddTip = () => {
+    setModalUpdateOrAddTipIsOpen(false)
+   
+  }
+  const handleOpenModalUpdateOrAddTip = () => {
+    setModalUpdateOrAddTipIsOpen(true)
+  }
+  const [tips, setTips] = useState([]);
+  const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasData, setHasData] = useState(true);
 
-  const handleDeleteTip = async (tipId) => {
+const update =()=>{
+  setTips([])
+  setPage(1)
+ fetchAllComplaints()
+}
+
+
+
+  const fetchAllComplaints = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(`http://localhost:8000/v1/Tips/getTips/${page}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `bearer ${getToken()}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('شيء ما حدث');
+      }
+
+      const data = await response.json();
+
+      if (data.data.tips.length === 0) {
+        setHasData(false);
+      } else {
+        setTips((prev) => [...prev, ...data.data.tips]);
+      }
+    } catch (error) {
+      toast.error('!حدث خطأ ما', {
+        position: 'top-right',
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+
+
+
+
+
+  useEffect(() => {
+    fetchAllComplaints();
+  }, [page]);
+
+  const handleScrollEvent = async () => {
+    const totalHeight = document.documentElement.scrollHeight;
+    const innerHeight = window.innerHeight;
+    const scrollTop = document.documentElement.scrollTop;
+
+    try {
+      if (innerHeight + scrollTop + 1 >= totalHeight) {
+        setPage((prev) => prev + 1);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScrollEvent);
+    return () => window.removeEventListener('scroll', handleScrollEvent);
+  }, []);
+
+
+  const handelDeleteTipApi = async (id) => {
+    setIsLoading(true);
     try {
       const response = await fetch('http://localhost:8000/v1/Tips/deleteTips', {
         method: 'DELETE',
-        body: JSON.stringify({ id: tipId }),
+        body: JSON.stringify({ id: id }),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `bearer ${getToken()}`
@@ -27,73 +113,66 @@ const nav = useNavigate
         throw new Error();
       }
 
+      const editArray = tips.filter(item => item.id !== id
+      )
+      setTips(editArray)
       toast.success('تم الحذف بنجاح', {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
-        pauseOnHover: true,
         draggable: true,
         progress: undefined,
         theme: "light",
-        
-      });
-      setTimeout(() => {
-        window.location.reload()
-      }, 3000);
-      
 
+      });
 
     } catch (error) {
       toast.error('!حدث خطأ ما', {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
-        pauseOnHover: true,
         draggable: true,
         progress: undefined,
         theme: "light",
       });
+
     }
+    setIsLoading(false);
   };
-  const svg = <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" /></svg>
+
   return (
     <>
-      <div className={s.grid}>
+      <div className='divflex'>
 
         {tips.map((item) => {
           return (
-            <TipsCard key={item.id} data={item} onDelete={handleDeleteTip} />
+            <TipCard key={item.id} data={item} api={handelDeleteTipApi} refreash={update} />
           )
+
 
         })}
       </div>
-      <Button onClick={()=>{
-            nav('AddTips')
-        }} title='إضافة' icon={svg} />
+
+      {!isLoading && tips.length === 0 && <div style={{ display: 'flex', gap: '20px', alignItems: 'center', position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%)' }}>
+        <h4 style={{ color: '#151726', fontWeight: 600, fontSize: '25px' }}>لا يوجد نصائح</h4>
+        <img style={{ width: '30px', color: 'black' }} src={nothing} alt='error' />
+
+      </div>}
+
+      {isLoading && tips.length === 0 && (
+        <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="loader">
+          <Bars height="80" width="80" color="#77ffab " ariaLabel="bars-loading" wrapperStyle={{}} wrapperClass="" visible={isLoading} />
+        </div>
+      )}
+
+
+
+      <ButtonAdd onClick={handleOpenModalUpdateOrAddTip} />
       <ToastContainer />
+      {ModalUpdateOrAddTipIsOpen && <ModalForUpdateOrAddTip edit={false} close={handleCloseModalUpdateOrAddTip} refreash={update} />}
     </>
   )
 }
 
-export const fetchAllTips = async () => {
-
-  const response = await fetch('http://localhost:8000/v1/Tips/getTips/1', {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `bearer ${getToken()}`
-
-
-    },
-  })
-
-  if (!response.ok) {
-
-    return null;
-  }
-  const data = await response.json()
-
-  return data.data.tips
-
-}

@@ -1,24 +1,25 @@
 import React, { useState } from 'react'
 import classes from './NewAssistant.module.css'
-import { MainInput } from '../../components/UI/MainInput'
-
 import { getToken } from '../../Util/Auth';
 import { ToastContainer, toast } from 'react-toastify';
 import LoadingBar from 'react-top-loading-bar';
-import { ModalForAddNewAsst } from '../../components/Manager/ModalForAddNewAsst';
+
+
+import { MainInput } from '../../components/UI/MainInput';
+import { ModalForAddNewAssistant } from '../../components/Manager/AddAssistant_Function/ModalForAddNewAssistant';
 export const NewAssistant = () => {
   const [enteredName, setEnteredName] = useState('');
   const [enteredNameTouched, setEnteredNameTouched] = useState(false);
-  const [progress, setProgress] = useState(0)
-  const [isLoading, setIsLoading] = useState(false);
-  // const [error, setError] = useState(null);
-  const [modalIsOpen, setModalIsOpen] = useState(false)
-  const [information, setinformation] = useState({
-    name: '',
-    password:'',
-  });
 
-  const enteredNameIsValid = enteredName.trim() !== '' && enteredName.trim().length > 3;
+  const [isLoading, setIsLoading] = useState(false);
+  function containsSpecialCharacters(str) {
+    var pattern = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/;
+    return pattern.test(str);
+  }
+  const [ModalShowPassowrdIsOpen, setModalShowPassowrdlIsOpen] = useState(false)
+  const [Password, setPassword] = useState('');
+
+  const enteredNameIsValid = enteredName.trim() !== '' && enteredName.trim().length > 3 && !containsSpecialCharacters(enteredName);
   const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
   let formIsValid = false;
 
@@ -31,19 +32,17 @@ export const NewAssistant = () => {
   const nameInputBlurHandler = (event) => {
     setEnteredNameTouched(true);
   };
-  const modalCloseHandler = () => {
-    setModalIsOpen(false)
+  const ModalShowPassowrdCloseHandler = () => {
+    setModalShowPassowrdlIsOpen(false)
   }
 
 
 
   const formSubmissionHandler = async (event) => {
     event.preventDefault();
-    
+
     setIsLoading(true);
-    // setError(null);
     setEnteredNameTouched(true);
-    setProgress(progress + 10)
     if (!enteredNameIsValid) {
       return;
     }
@@ -52,7 +51,7 @@ export const NewAssistant = () => {
       nameAdminAssistance: enteredName
     }
 
-  
+
     try {
       const response = await fetch('http://localhost:8000/v1/User/register/AdminAssistance', {
         method: 'POST',
@@ -68,24 +67,27 @@ export const NewAssistant = () => {
         const data = await response.json()
         throw data;
       }
+
       const data = await response.json()
-     
-      setinformation(data.data)
-      setModalIsOpen(true)
-
-
-
-
-
+      setPassword(data.data.password)
+      setModalShowPassowrdlIsOpen(true)
+      toast.success('تم الإضافة', {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      })
     } catch (error) {
 
       if (error.message === 'The name must be : more 3 characters. Each character can be a lowercase letter, an uppercase letter, or a number') {
         toast.warn('الاسم يجب ان يكون اكثر من ثلاث احرف ', {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
-          pauseOnHover: true,
           draggable: true,
           progress: undefined,
           theme: "light",
@@ -95,10 +97,9 @@ export const NewAssistant = () => {
       if (error.message === 'Name is already exists. please rename this name.') {
         toast.warn('الاسم موجود', {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
-          pauseOnHover: true,
           draggable: true,
           progress: undefined,
           theme: "light",
@@ -107,10 +108,9 @@ export const NewAssistant = () => {
       else {
         toast.error('!حدث خطأ ما', {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
-          pauseOnHover: true,
           draggable: true,
           progress: undefined,
           theme: "light",
@@ -122,7 +122,7 @@ export const NewAssistant = () => {
     setIsLoading(false);
     setEnteredName('');
     setEnteredNameTouched(false);
-    
+
 
   };
   const configurationNameLogin = {
@@ -134,7 +134,7 @@ export const NewAssistant = () => {
     <>
       <form className={classes.form} onSubmit={formSubmissionHandler}>
         <span className={classes.title}>مساعد مدير النظام</span>
-        <p className="classes.description">
+        <p className={classes.description}>
           في عصر التكنولوجيا الحديثة  أصبحت المنظمات الصحية تعتمد بشكل كبير على النظم الإلكترونية لتسهيل سير عملها وتحسين جودة الرعاية الصحية التي تقدمها. ولتحقيق هذه الأهداف، فإن لدينا مساعد مدير النظام الذي يعتبر عمودًا فقريًا لعملنا يعمل مساعد مدير النظام على تطوير وتنفيذ السياسات والإجراءات الفنية اللازمة لضمان استقرار وأمان نظام  الخاص بنا. إنه الشخص الذي يتحمل مسؤولية حماية بيانات المرضى الحساسة وضمان توافر النظام بشكل مستمر ومواكبة التقدم التكنولوجي المستمر وتلبية احتياجاتنا المتغيرة
         </p>
         <div>
@@ -150,13 +150,16 @@ export const NewAssistant = () => {
 
         </div>
         {nameInputIsInvalid && (
-          <p className='error-text'>الأسم يجب أن لا يكون فارغ.</p>
+          <p className='error-text'>الأسم فارغ.</p>
         )}
-        {modalIsOpen && <ModalForAddNewAsst data={information} close={modalCloseHandler} />}
+        {ModalShowPassowrdIsOpen && <ModalForAddNewAssistant password={Password} close={ModalShowPassowrdCloseHandler} />}
+
       </form>
-      <ToastContainer />
-      {isLoading && <LoadingBar color="#f11946" progress={progress}
-        onLoaderFinished={() => setProgress(0)} />}
+     
+      <ToastContainer/>
+      {
+        isLoading && <LoadingBar shadowStyle={{ display: 'none' }} color='#31af99' progress={100} height={5} loaderSpeed={15000} transitionTime={15000} />
+      }
     </>
   )
 }

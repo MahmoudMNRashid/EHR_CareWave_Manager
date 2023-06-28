@@ -1,6 +1,7 @@
 import React from 'react'
 import classes from './Nav.module.css'
 import { NavLink } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export const Nav = (props) => {
     return (
@@ -11,11 +12,12 @@ export const Nav = (props) => {
 
                 {props.svgPartOne.map((item) => {
                     return (
-                        <NavLink  key={Math.random()} title={item.explanation} to={item.path} className={({ isActive }) =>
-                            isActive ? `${classes.active} flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300` : `flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300`
+                        <NavLink key={Math.random()} title={item.explanation} to={item.path} className={({ isActive }) =>
+                            isActive ? `${classes.active} ${classes.nav} flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300` : ` ${classes.nav} flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300`
                         } >
 
-                            {item.icon}
+                            <FontAwesomeIcon icon={item.icon} style={{ color: "#aaacc2", }} />
+                            {item.name}
 
                         </NavLink>
                     )
@@ -30,10 +32,11 @@ export const Nav = (props) => {
                     {props.svgPartTwo.map((item) => {
                         return (
                             <NavLink key={Math.random()} title={item.explanation} to={item.path} className={({ isActive }) =>
-                                isActive ? `${classes.active} flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300` : `flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300`
+                                isActive ? `${classes.active}  ${classes.nav} flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300` : `  ${classes.nav} flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300`
                             } >
 
-                                {item.icon}
+                                <FontAwesomeIcon icon={item.icon} style={{ color: "#aaacc2", }} />
+                                {item.name}
 
                             </NavLink>
                         )

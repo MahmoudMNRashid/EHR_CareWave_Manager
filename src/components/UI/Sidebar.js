@@ -1,25 +1,29 @@
 import React from 'react'
-import {  NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import classes from './Sidebar.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 export const Sidebar = (props) => {
 
     return (
-      
+
         <div className={`${classes.sidebar} ${props.className}`}>
             <div className={`d-flex flex-column`}>
-            {
-           props.np.map((item)=>{
+                {
+                    props.np.map((item) => {
 
-                 return(
-                    <NavLink  key={Math.random()} to={item.path} className={({ isActive }) =>
-                    isActive ? `${classes.active} ${classes.nav}` : classes.nav
-                }>
-                    {item.name}
-                </NavLink>  
-                 )
-            })
-        }
+                        return (
+                            <NavLink key={Math.random()} to={item.path} className={({ isActive }) =>
+                                isActive ? `${classes.active} ${classes.nav}` : classes.nav
+                            }>
+                                <FontAwesomeIcon  icon={item.icon} style={{ color: "#aaacc2", }} />
+                                {item.name}
+
+                            </NavLink>
+                        )
+                    })
+                }
             </div>
         </div>
     )

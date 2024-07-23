@@ -7,6 +7,7 @@ import LoadingBar from 'react-top-loading-bar';
 
 import { MainInput } from '../../components/UI/MainInput';
 import { ModalForAddNewAssistant } from '../../components/Manager/AddAssistant_Function/ModalForAddNewAssistant';
+import { Helmet } from 'react-helmet';
 export const NewAssistant = () => {
   const [enteredName, setEnteredName] = useState('');
   const [enteredNameTouched, setEnteredNameTouched] = useState(false);
@@ -132,6 +133,8 @@ export const NewAssistant = () => {
   }
   return (
     <>
+                <Helmet><title>إضافة مساعد جديد</title></Helmet>
+
       <form className={classes.form} onSubmit={formSubmissionHandler}>
         <span className={classes.title}>مساعد مدير النظام</span>
         <p className={classes.description}>

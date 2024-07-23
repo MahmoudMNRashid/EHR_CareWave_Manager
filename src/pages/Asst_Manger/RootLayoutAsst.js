@@ -48,6 +48,13 @@ export const RootLayoutAsst = () => {
 
         },
         {
+
+            explanation:'إضافة تخصص جديد',
+            path:'AddNewSpecialization',
+            icon:faAdd
+
+        },
+        {
             icon: faRightFromBracket,
             explanation: 'تسجيل الخروج',
             path: '../../logout'
@@ -92,9 +99,16 @@ export const RootLayoutAsst = () => {
 
         },
         {
-            name: 'test',
-            path: 'test'
+
+            name:'إضافة تخصص جديد',
+            path:'AddNewSpecialization',
+            icon:faAdd
+
         },
+        // {
+        //     name: 'test',
+        //     path: 'test'
+        // },
         {
             name: 'تسجيل الخروج',
             path: '../../logout',
@@ -111,10 +125,7 @@ export const RootLayoutAsst = () => {
                 </Col>
                 <Col  sm="10" xs="10" md="10" className={classes.col2}>
                     <Outlet  />
-                    <svg
-                        className={classes.svg} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                        <path fill="#31af99" fillOpacity="1" d="M0,64L34.3,90.7C68.6,117,137,171,206,202.7C274.3,235,343,245,411,208C480,171,549,85,617,85.3C685.7,85,754,171,823,176C891.4,181,960,107,1029,69.3C1097.1,32,1166,32,1234,48C1302.9,64,1371,96,1406,112L1440,128L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"></path>
-                    </svg>
+                   
                 </Col>
             </Row>
             {

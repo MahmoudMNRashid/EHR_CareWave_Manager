@@ -18,11 +18,12 @@ const ModalImages = (props) => {
         <div className={classes.modal}>
             <Carousel >
                 {props.images.map((image, index) => (
-                    <Carousel.Item style={{width:'100%'}} key={index}>
+            
+                    <Carousel.Item style={{ width: '100%' }} key={index}>
                         <TransformWrapper initialScale={1}  >
 
                             <TransformComponent>
-                                <img style={{ aspectRatio: '16/9',width:'640px' }} src={image} alt="test" />
+                                <img style={{ aspectRatio: '16/9', width: '640px' }} src={image} alt="test" />
                             </TransformComponent>
                         </TransformWrapper>
                     </Carousel.Item>

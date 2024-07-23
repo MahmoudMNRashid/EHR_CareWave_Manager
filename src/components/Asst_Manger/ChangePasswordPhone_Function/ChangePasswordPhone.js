@@ -59,7 +59,7 @@ export const ChangePasswordPhone = () => {
      
         const info = {
             idSyr: enteredidSyr,
-            حhone: enteredNewPhone,
+            phone: enteredNewPhone,
             newPassword: enteredNewPassword
         }
 
@@ -79,6 +79,7 @@ export const ChangePasswordPhone = () => {
               const data = await response.json()
               throw data;
             }
+            console.log(response)
             toast.success('تم التغيير بنجاح ', {
               position: "top-right",
               autoClose: 1000,
@@ -132,13 +133,13 @@ export const ChangePasswordPhone = () => {
       
           } finally{
             setIsLoading(false);
-            setEnteredidSyr('');
+            // setEnteredidSyr('');
             setEnteredidSyrTouched(false);
     
-            setEnteredNewPhone('');
+            // setEnteredNewPhone('');
             setEnteredNewPhoneTouched(false);
     
-            setEnteredNewPassword('');
+            // setEnteredNewPassword('');
             setEnteredNewPasswordTouched(false);
           }
 

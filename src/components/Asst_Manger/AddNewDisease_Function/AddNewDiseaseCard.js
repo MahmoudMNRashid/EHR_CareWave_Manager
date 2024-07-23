@@ -15,9 +15,9 @@ export const AddNewDiseaseCard = () => {
     const [enteredName, setEnteredName] = useState('');
     const [enteredNameTouched, setEnteredNameTouched] = useState(false);
     const [selectedFile, setSelectedFile] = useState('');
+
     const handleFileChange = (event) => {
         const file = event.target.files[0];
-        console.log(file)
         setSelectedFile(file);
     };
     const [isLoading, setIsLoading] = useState(false);
@@ -47,29 +47,32 @@ export const AddNewDiseaseCard = () => {
         }
 
         const info = {
-            disease: enteredName,
-
+            disease: enteredName
         }
         try {
-            const response = await fetch('http://localhost:8001/v1/Disease/one', {
+            const response = await fetch(`http://localhost:8001/v1/Disease/one`, {
                 method: 'POST',
                 body: JSON.stringify(info),
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `bearer ${getToken()}  `
-
-
-                },
-            });
+                    'Authorization': `bearer ${getToken()}`
+                }
+            })
             if (!response.ok) {
+
+                console.log(response)
                 const data = await response.json()
-
-                throw data;
+                throw data
             }
-            const data = await response.json()
-            if (data.data.message === 'Added successfully.') {
 
-                toast.success('تم إضافة المرض', {
+            const data = await response.json()
+
+
+            if (data.message === 'This disease cannot Added because the disease is exists.') {
+                throw new Error('found')
+
+            } else {
+                toast.success('!تم الإضافة بنجاح', {
                     position: "top-right",
                     autoClose: 1000,
                     hideProgressBar: false,
@@ -77,38 +80,44 @@ export const AddNewDiseaseCard = () => {
                     draggable: true,
                     progress: undefined,
                     theme: "light",
-                });
-
-
+                })
             }
 
 
 
-
         } catch (error) {
+            console.log(error)
+            if (error.message === 'This disease cannot Added because the disease is exists.') {
+                toast.warning('!المرض موجود', {
+                    position: "top-right",
+                    autoClose: 1000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                })
 
+            } else {
+                toast.error('!حدث خطأً ما', {
+                    position: "top-right",
+                    autoClose: 1000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                })
+            }
 
-            toast.error('!حدث خطأً ما', {
-                position: "top-right",
-                autoClose: 1000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
-
-
-        } finally {
-
-            setIsLoading(false);
-            setEnteredName('');
-            setEnteredNameTouched(false);
 
         }
 
 
 
+        setIsLoading(false);
+
+        setEnteredNameTouched(false);
 
 
 
@@ -127,7 +136,7 @@ export const AddNewDiseaseCard = () => {
 
 
         try {
-            console.log(getToken())
+
             const response = await fetch('http://localhost:8001/v1/Disease/many', {
                 method: 'POST',
                 body: formData,
@@ -140,16 +149,28 @@ export const AddNewDiseaseCard = () => {
                 },
             });
 
-            console.log(response)
+
             if (!response.ok) {
                 const data = await response.json()
 
                 throw data;
             }
-            const data = await response.json()
-            console.log(data)
 
-            toast.success('تم إضافة المرض', {
+            const data = await response.json()
+             if(data.data.message==='some disease name added because the other is exists'){
+                toast.warning('!تم إضافة بعض الأمراض', {
+                    position: "top-right",
+                    autoClose: 1000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+            }else{
+
+            
+            toast.success(' تم إضافة الملف كاملاً', {
                 position: "top-right",
                 autoClose: 1000,
                 hideProgressBar: false,
@@ -159,7 +180,7 @@ export const AddNewDiseaseCard = () => {
                 theme: "light",
             });
 
-
+        }
 
 
 
@@ -167,7 +188,19 @@ export const AddNewDiseaseCard = () => {
 
         } catch (error) {
 
+            if (error.message === 'no add to elastic.') {
+                toast.warning('!الأمراض موجودة ', {
+                    position: "top-right",
+                    autoClose: 1000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
 
+            }
+            else{
             toast.error('!حدث خطأً ما', {
                 position: "top-right",
                 autoClose: 1000,
@@ -177,13 +210,11 @@ export const AddNewDiseaseCard = () => {
                 progress: undefined,
                 theme: "light",
             });
-
-
-        } finally {
-
-            setIsLoading(false);
-            setSelectedFile('')
         }
+
+        }
+        setIsLoading(false);
+        setSelectedFile('')
 
 
 
@@ -196,60 +227,64 @@ export const AddNewDiseaseCard = () => {
         label: 'اسم المرض'
     }
     return (
-        <div className={classes.container} >
-            <div className={classes.right}>
+        <>
+            <div className={classes.container} >
+                <div className={classes.right}>
 
-                <div>
-                    <p >  إدخال مرض جديد </p>
+                    <div>
+                        <p >  إدخال مرض جديد </p>
 
-                </div>
-                <div>
-                    <MainInput
-                        configuration={nameDiseaseConfiguration}
-                        onChange={nameInputChangeHandler}
-                        onBlur={nameInputBlurHandler}
-                        value={enteredName}
-                        isInvalid={nameInputIsInvalid}
-                    />
-                    {nameInputIsInvalid && <p style={{ fontSize: '10px' }} className='error-text'>الأسم فارغ.</p>}
+                    </div>
+                    <div>
+                        <MainInput
+                            configuration={nameDiseaseConfiguration}
+                            onChange={nameInputChangeHandler}
+                            onBlur={nameInputBlurHandler}
+                            value={enteredName}
+                            isInvalid={nameInputIsInvalid}
+                        />
+                        {nameInputIsInvalid && <p style={{ fontSize: '10px' }} className='error-text'>الأسم فارغ.</p>}
+                    </div>
+
+                    <div>
+                        <button onClick={AddNameDiseaseApi} disabled={!formIsValid}><FontAwesomeIcon style={{ color: '#31af99', fontSize: '28px' }} icon={faPlusCircle} /></button>
+                    </div>
                 </div>
 
-                <div>
-                <button onClick={AddNameDiseaseApi} disabled={!form1IsValid}><FontAwesomeIcon style={{ color: '#31af99', fontSize: '28px' }} icon={faPlusCircle} /></button>
+
+                <div className={classes.left}>
+                    <div> <p >  إدخال أمراض من ملف أكسل </p></div>
+                    <div>
+                        <label htmlFor="fileInput">
+                            <img src={excel} alt="Choose File" />
+                        </label>
+                        <input
+                            id="fileInput"
+                            type="file"
+                            style={{ display: 'none' }}
+                            onChange={handleFileChange}
+                            accept=".xlsx, .xls"
+
+                        />
+                        {selectedFile ? <p>{selectedFile.name}</p> : <p>لم يتم اختيار ملف </p>}
+                    </div>
+
+
+
+                    <div>
+                        <button onClick={AddFileDiseaseApi} disabled={!form1IsValid}><FontAwesomeIcon style={{ color: '#31af99', fontSize: '28px' }} icon={faPlusCircle} /></button>
+                    </div>
                 </div>
+
+
+
+
+
             </div>
-
-
-            <div className={classes.left}>
-            <div> <p >  إدخال أمراض من ملف أكسل </p></div>
-               <div>
-               <label htmlFor="fileInput">
-                    <img src={excel} alt="Choose File" />
-                </label>
-                <input
-                    id="fileInput"
-                    type="file"
-                    style={{ display: 'none' }}
-                    onChange={handleFileChange}
-                    accept=".xlsx, .xls"
-
-                />
-                {selectedFile ? <p>{selectedFile.name}</p> : <p>لم يتم اختيار ملف </p>}
-               </div>
-
-
-
-                <div>
-                <button onClick={AddFileDiseaseApi} disabled={!form1IsValid}><FontAwesomeIcon style={{ color: '#31af99', fontSize: '28px' }} icon={faPlusCircle} /></button>
-                </div>
-            </div>
-
-
             <ToastContainer />
             {
                 isLoading && <LoadingBar shadowStyle={{ display: 'none' }} color='#31af99' progress={100} height={5} loaderSpeed={15000} transitionTime={15000} />
             }
-
-        </div>
+        </>
     )
 }

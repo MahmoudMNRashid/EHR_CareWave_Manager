@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { DoctorCard } from '../../components/Manager/AllAboutDr_Function/DoctorCard';
 import { DrSearchForm } from '../../components/Manager/AllAboutDr_Function/DrSearchForm';
 import nothing from '../../style/nothing (1).png';
+import { Helmet } from 'react-helmet';
 
 export const DoctorsSearchName = () => {
   const [doctorsData, setDoctorsData] = useState([]);
@@ -62,6 +63,8 @@ export const DoctorsSearchName = () => {
 
   return (
     <>
+            <Helmet><title>البحث عن طبيب عن طريق الأسم</title></Helmet>
+
       <DrSearchForm api={fetchAllDoctorByName} name={'اسم الطبيب'} />
      <div style={{ display:'flex',alignItems:'center',justifyContent:'center' ,marginTop:'10px',gap:'10px'}}>
      { doctorsData.length > 0 &&<p> النتائج حسب المحافظة</p>}

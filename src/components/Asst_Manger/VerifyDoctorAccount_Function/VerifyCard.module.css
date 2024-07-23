@@ -6,7 +6,7 @@
     width: 350px;
     border-radius: 12px;
 
-    box-shadow: 5px 5px 15px 1px rgba(0,0,0,0.5);
+    box-shadow: 5px 5px 15px 1px rgba(0,0,0,0.1);
 }
 
 .container:hover{

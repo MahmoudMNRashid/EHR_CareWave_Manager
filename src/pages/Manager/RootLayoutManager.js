@@ -5,7 +5,7 @@ import { Sidebar } from '../../components/UI/Sidebar'
 import { Nav } from '../../components/UI/Nav'
 import classes from './RootLayoutManager.module.css'
 import LoadingBar from 'react-top-loading-bar'
-import { faUsers, faRightFromBracket, faChartSimple, faUserXmark, faCommentMedical, faMagnifyingGlass, faCircleExclamation, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faUsers, faRightFromBracket, faChartSimple, faUserXmark, faCommentMedical, faMagnifyingGlass, faCircleExclamation, faUserPlus, faLaptopMedical } from '@fortawesome/free-solid-svg-icons';
 
 
 export const RootLayoutManager = () => {
@@ -55,15 +55,27 @@ export const RootLayoutManager = () => {
       icon: faMagnifyingGlass
     },
     {
-      name: 'حذف حساب فئة طبية',
+      name: ' حذف حساب فئة طبية أو مريض',
       path: "DeleteAccountDoctor",
       icon: faUserXmark
     },
+    {
+      name: '  السجل الصحي لمريض',
+      path: 'HealthRecord',
+      icon: faLaptopMedical
+    },
+
     {
       name: 'التقارير',
       path: "Reports",
       icon: faChartSimple
     },
+    //   {
+    //     name: 'test',
+    //     path: 'test',
+    //     icon: faRightFromBracket
+
+    // },
     {
       name: 'تسجيل الخروج',
       path: "../../logout",
@@ -109,7 +121,7 @@ export const RootLayoutManager = () => {
 
   const svgPartTwo = [
 
-   
+
     {
       icon: faCommentMedical,
       explanation: 'النصائح الطبية',
@@ -126,10 +138,16 @@ export const RootLayoutManager = () => {
       path: 'DeleteAccountDoctor'
     },
     {
+      explanation: '  السجل الصحي لمريض',
+      path: '/dashboardSysAdmin/HealthRecord',
+      icon: faLaptopMedical
+    },
+    {
       icon: faChartSimple,
       explanation: 'التقارير',
       path: 'Reports'
     },
+
     {
       icon: faRightFromBracket,
       explanation: 'تسجيل الخروج',

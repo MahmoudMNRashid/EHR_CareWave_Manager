@@ -8,6 +8,7 @@ import { ButtonAdd } from '../../components/Manager/Tips_Function/ButtonAdd';
 import { ModalForUpdateOrAddTip } from '../../components/Manager/Tips_Function/ModalForUpdateOrAddTip';
 import nothing from '../../style/nothing (1).png'
 import { Bars } from 'react-loader-spinner';
+import { Helmet } from 'react-helmet';
 export const MedicalTips = () => {
  
 
@@ -144,6 +145,8 @@ const update =()=>{
 
   return (
     <>
+                <Helmet><title>النصائح الطبية</title></Helmet>
+
       <div className='divflex'>
 
         {tips.map((item) => {

@@ -5,7 +5,7 @@
     width: 350px;
     gap: 100px;
     border-radius: 12px;
-    
+    position: relative;
 }
 
 
@@ -32,7 +32,7 @@
     display: flex;
     gap: 10px;
     align-items: center;
-   
+position: relative;
     
 }
 .info p{
@@ -47,6 +47,16 @@
 
 .left img {
     width: 64px;
+}
+.left p {
+    font-size: 1rem;
+    line-height: 2rem;
+    font-weight: 900;
+    letter-spacing: -0.025em;
+    color: #d6d6d6; 
+    position: absolute;
+    left: 10%;
+    top: 50%;
 }
 @media (max-width:576px) {
     .container{

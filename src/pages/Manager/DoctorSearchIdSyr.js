@@ -6,13 +6,14 @@ import { getToken } from '../../Util/Auth'
 import { DrSearchForm } from '../../components/Manager/AllAboutDr_Function/DrSearchForm'
 import { DoctorCard } from '../../components/Manager/AllAboutDr_Function/DoctorCard';
 import nothing from '../../style/nothing (1).png'
+import { Helmet } from 'react-helmet';
 export const DoctorSearchIdSyr = () => {
   const [doctorsName, setDoctorsName] = useState([])
 
   const fetchTheDoctorByIdSyr = async (idSyr) => {
 
     try {
-      const response = await fetch(`http://localhost:8000/v1/User/get-Sick/bysyrid/${idSyr}`, {
+      const response = await fetch(`http://localhost:8000/v1/User/get-doctor/bysyrid/${idSyr}`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `bearer ${getToken()}`
@@ -27,7 +28,7 @@ export const DoctorSearchIdSyr = () => {
       const data = await response.json()
 
       const editData = data.data.result
-
+      console.log(editData)
       if (data.data.result.length === 0) {
         toast.warning('الرقم الوطني غير موجود ', {
           position: "top-right",
@@ -59,6 +60,8 @@ export const DoctorSearchIdSyr = () => {
   }
   return (
     <>
+            <Helmet><title> البحث عن طبيب عن طريق الرقم الوطني</title></Helmet>
+
       <DrSearchForm fromIdSyr={true} api={fetchTheDoctorByIdSyr} name={' الرقم الوطني للطبيب'} />
 
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -76,7 +79,7 @@ export const DoctorSearchIdSyr = () => {
           )
         }
       </div>
-      
+
       <ToastContainer />
 
     </>

@@ -4,6 +4,7 @@ import { DrSearchForm } from '../../components/Manager/AllAboutDr_Function/DrSea
 import { getToken } from '../../Util/Auth'
 import { DoctorCard } from '../../components/Manager/AllAboutDr_Function/DoctorCard'
 import nothing from '../../style/nothing (1).png'
+import { Helmet } from 'react-helmet'
 
 export const DoctorSearchIdMedical = () => {
   const [doctorsName, setDoctorsName] = useState([])
@@ -58,6 +59,8 @@ export const DoctorSearchIdMedical = () => {
   }
   return (
     <>
+            <Helmet><title> البحث عن طبيب عن طريق الرقم الطبي  </title></Helmet>
+
       <DrSearchForm fromIdSyr={true} api={fetchTheDoctorByIdMedical} name={' الرقم الطبي للطبيب'} />
 
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

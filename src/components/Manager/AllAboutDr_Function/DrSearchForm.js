@@ -2,8 +2,13 @@ import React, { useState } from 'react'
 import classes from './DrSearchForm.module.css'
 import { MainInput } from '../../UI/MainInput'
 import LoadingBar from 'react-top-loading-bar';
+import { useLocation } from 'react-router-dom';
 export const DrSearchForm = (props) => {
-    const [enteredName, setEnteredName] = useState('');
+    const {state} = useLocation();
+    const check= state!==null && props.fromIdSyr
+// const { idSyr } = state;
+console.log(state)
+    const [enteredName, setEnteredName] = useState(`${check?state.idSyr:''}`);
     const [enteredNameTouched, setEnteredNameTouched] = useState(false);
 
     const [isLoading, setIsLoading] = useState(false);

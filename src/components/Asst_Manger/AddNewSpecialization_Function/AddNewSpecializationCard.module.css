@@ -1,0 +1,162 @@
+.container {
+
+    border: 2px solid #31af99;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* flex-wrap: wrap; */
+
+    width: 800px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -75%);
+    border-radius: 12px;
+    z-index: 30;
+}
+
+@media (max-width:1000px) {
+    .container {
+        width: 700px;
+    }
+
+}
+
+@media (max-width:850px) {
+    .container {
+        flex-direction: column;
+        width: fit-content;
+        padding: 10px;
+        transform: translate(-50%, -60%);
+
+    }
+
+}
+
+
+.right {
+
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 300px;
+    height: 200px;
+    margin-left: 60px;
+
+}
+
+@media (max-width:850px) {
+    .right {
+        margin-left: 0;
+        margin-bottom: 20px;
+    }
+
+}
+
+.right>div:nth-child(1) p {
+
+    font-size: 0.8rem;
+    line-height: 2rem;
+    font-weight: 900;
+    letter-spacing: -0.025em;
+    color: #d6d6d6;
+    margin-bottom: 20px;
+
+
+}
+
+.right>div:nth-child(2) {
+
+    height: 65px;
+}
+
+.right>div:nth-child(3) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right>div:nth-child(3) button {
+
+
+    
+margin-top: 30px;
+
+
+}
+
+.right button:disabled,
+.right button:disabled:hover,
+.right button:disabled:active {
+
+    cursor: not-allowed;
+}
+
+
+
+.left {
+
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+
+    width: 300px;
+    height: 200px;
+
+}
+
+.left>div:nth-child(1) p {
+
+    font-size: 0.8rem;
+    line-height: 2rem;
+    font-weight: 900;
+    letter-spacing: -0.025em;
+    color: #d6d6d6;
+    margin-bottom: 20px;
+
+}
+
+.left>div:nth-child(2) {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    gap: 20px;
+}
+
+.left>div:nth-child(2) label img {
+    width: 50px;
+}
+
+.left>div:nth-child(2) p {
+    font-size: 0.8rem;
+    line-height: 2rem;
+
+    letter-spacing: -0.025em;
+}
+
+
+
+
+.left>div:nth-child(3) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.left button {
+    margin-top: 45px;
+}
+
+.left button:disabled,
+.left button:disabled:hover,
+.left button:disabled:active {
+
+    cursor: not-allowed;
+}
+
+
+.file {
+
+    display: none;
+}

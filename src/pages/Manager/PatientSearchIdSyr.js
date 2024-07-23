@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import { getToken } from '../../Util/Auth'
 import { DrSearchForm } from '../../components/Manager/AllAboutDr_Function/DrSearchForm'
 import nothing from '../../style/nothing (1).png'
+import { Helmet } from 'react-helmet'
 
 export const PatientSearchIdSyr = () => {
   const [Patient, setPatient] = useState([])
@@ -58,6 +59,8 @@ export const PatientSearchIdSyr = () => {
 
   return (
     <>
+                <Helmet><title>البحث عن مريض عن طريق الرقم الوطني</title></Helmet>
+
     <DrSearchForm fromIdSyr={true} api={fetchPatientByIdSyr} name={' الرقم الوطني للمريض'} />
 
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

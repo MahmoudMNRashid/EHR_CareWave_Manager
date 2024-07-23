@@ -11,6 +11,10 @@ import state from '../../../style/DoctorCard/real-state.png'
 import stethscope from '../../../style/DoctorCard/stethoscope.png'
 import iphone from '../../../style/DoctorCard/iphone.png'
 export const DoctorCard = (props) => {
+    console.log(props)
+
+    const dateObject = new Date(props.data.dateTime);
+    const extractedDate = dateObject.toISOString().split('T')[0];
     return (
         <div className={classes.container}>
 
@@ -23,7 +27,7 @@ export const DoctorCard = (props) => {
                     </div>
                     <div className={classes.info}>
                         <img src={date} alt='error' />
-                        <p> 2000-2-23</p>
+                        <p>{extractedDate}</p>
                     </div>
                     <div className={classes.info}>
                         <img src={id2} alt='error' />
@@ -41,10 +45,10 @@ export const DoctorCard = (props) => {
                         <img src={location} alt='error' />
                         <p>{props.data.address}</p>
                     </div>
-                    <div className={classes.info}>
+                    {props.data.specialization !== '_' && <div className={classes.info}>
                         <img src={stethscope} alt='error' />
                         <p>{props.data.specialization}</p>
-                    </div>
+                    </div>}
                     <div className={classes.info}>
                         <img src={staff} alt='error' />
                         <p>{props.data.medicalid}</p>
@@ -57,9 +61,9 @@ export const DoctorCard = (props) => {
 
 
             <div className={classes.left}>
+                {props.data.roleId === 1 ? (<p>طبيب</p>) : props.data.roleId === 2 ? (<p>مصور أشعة</p>) : props.dat.data.roleId === 3 ? (<p>محلل</p>) : <p>صيدلي</p>}
 
-                
-                {props.data.gender==='male'?<img src={doctor} alt='error' />:<img src={doctor1} alt='error' />}
+                {props.data.gender === 'male' ? <img src={doctor} alt='error' /> : <img src={doctor1} alt='error' />}
             </div>
 
 

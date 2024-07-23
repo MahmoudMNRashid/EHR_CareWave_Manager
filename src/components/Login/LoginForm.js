@@ -68,25 +68,28 @@ export const LoginForm = () => {
                 throw data;
             }
             const data = await response.json()
-            console.log(data)
-            localStorage.setItem('token', data.data.token);
-            const expiration = new Date(data.data.expire).getTime() / 1000;
-            console.log(expiration)
-            localStorage.setItem('expiration', expiration);
+            
+            const token = data.data.token;
+            localStorage.setItem('token',token);
+           
+            const expiration = new Date(data.data.expire)
+            const milliseconds = expiration.getTime();
+            localStorage.setItem('expiration', milliseconds);
+           
             const role = data.data.role
             if (role === "admin") {
                 localStorage.setItem('role', "admin")
             }
             else if (role === "admin_assistant") {
-                localStorage.setItem('role', "asstAdmin")
+                localStorage.setItem('role', "admin_assistant")
             } else {
                 localStorage.setItem('role', '_')
             }
 
-            if (role === "admin") {
-                nav('/dashboardSysAdmin')
-            } else if (role === "admin_assistant") {
-                nav('/dashboardAsst')
+            if (role === "admin" && token) {
+                nav('/dashboardSysAdmin',{replace:true})
+            } else if (role === "admin_assistant"&&token) {
+                nav('/dashboardAsst',{replace:true})
             } else {
                 throw new Error('forbidden')
             }
@@ -117,6 +120,7 @@ export const LoginForm = () => {
                     draggable: true,
                     progress: undefined,
                     theme: "light",
+                    
                 });
             } else {
                 toast.error('!حدث خطأً ما', {
@@ -133,13 +137,14 @@ export const LoginForm = () => {
         }
 
         setIsLoading(false);
-        setEnteredName('');
+        // setEnteredName('');
         setEnteredNameTouched(false);
 
-        setEnteredPassword('');
+        // setEnteredPassword('');
         setEnteredPasswordTouched(false);
     };
 
+    
 
     const nameConfiguration = {
         type: 'text',
@@ -184,7 +189,7 @@ export const LoginForm = () => {
             <div className={classes.left}>
                 <img src={illustrations} alt='error'></img>
             </div>
-            <ToastContainer />
+            <ToastContainer style={window.innerWidth <=425 ? {display:'flex',alignItems:'center',justifyContent:'center'} :{}}/>
             {
                 isLoading && <LoadingBar shadowStyle={{ display: 'none' }} color='#31af99' progress={100} height={5} loaderSpeed={15000} transitionTime={15000} />
             }

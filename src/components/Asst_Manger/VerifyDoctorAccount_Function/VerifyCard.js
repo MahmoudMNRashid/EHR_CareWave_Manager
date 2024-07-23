@@ -26,8 +26,9 @@ export const VerifyCard = (props) => {
         `http://localhost:8000${props.data.identify}`
 
     ]
+    console.log('images',images)
 
-    const roleId = props.data.roleId - 1
+    const roleId = props.data.roleId
     return (
         <>
             <div className={classes.container}>
@@ -58,10 +59,10 @@ export const VerifyCard = (props) => {
                     </div>
                     <div className={classes.containerInfo}>
                         <img src={typee} alt='error' />
-                        {roleId === 0 ? <p>طبيب </p> : (roleId === 1 ? <p>مصور أشعة </p> : (roleId === 2 ? <p>مخبري </p> : <p>صيدلي </p>))}
+                        {roleId === 1 ? <p>طبيب </p> : (roleId ===2 ? <p>مصور أشعة </p> : (roleId === 3 ? <p>مخبري </p> : <p>صيدلي </p>))}
                     </div>
                     {
-                        roleId === 0 && <div className={classes.containerInfo}>
+                        roleId === 1 && <div className={classes.containerInfo}>
                             <img src={speacliazion} alt='error' />
                             <p> {props.data.specialization}</p>
                         </div>

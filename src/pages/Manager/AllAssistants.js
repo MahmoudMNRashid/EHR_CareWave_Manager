@@ -3,6 +3,7 @@ import { AssistantCard } from '../../components/Manager/AllAssistants_Function/A
 import { getToken } from '../../Util/Auth';
 import { ToastContainer, toast } from 'react-toastify';
 import nothing from '../../style/nothing (1).png';
+import { Helmet } from 'react-helmet';
 export const AllAssistants = () => {
     const [Assistants, setAssistants] = useState([]);
     const [page, setPage] = useState(1);
@@ -86,6 +87,7 @@ export const AllAssistants = () => {
    
     return (
         <>
+        <Helmet><title> مساعديين مدير النظام</title></Helmet>
         <div className='divflex'>
             {Assistants.map((item) => (
                 <AssistantCard key={item.id} data={item} refresh={forRefreshPage} />

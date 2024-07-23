@@ -7,6 +7,7 @@ import { ComplaintsCard } from '../../components/Manager/Complaints_Function/Com
 import { ButtonDelete } from '../../components/Manager/Complaints_Function/ButtonDelete';
 import { ModalForDeleteAllComplaint } from '../../components/Manager/Complaints_Function/ModalForDeleteAllComplaint';
 import nothing from '../../style/nothing (1).png';
+import { Helmet } from 'react-helmet';
 
 export const Complaints = () => {
 
@@ -136,6 +137,8 @@ export const Complaints = () => {
 
   return (
     <>
+            <Helmet><title> الشكاوى</title></Helmet>
+
       <div className="divflex">
         {complaints.map((item) => (
           <ComplaintsCard key={item.id} data={item} />

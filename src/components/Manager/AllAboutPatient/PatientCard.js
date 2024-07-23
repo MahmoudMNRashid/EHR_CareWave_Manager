@@ -9,6 +9,10 @@ import location from '../../../style/DoctorCard/location.png'
 import state from '../../../style/DoctorCard/real-state.png'
 import iphone from '../../../style/DoctorCard/iphone.png'
 export const PatientCard = (props) => {
+    console.log(props)
+
+    const dateObject = new Date(props.data.date);
+    const extractedDate = dateObject.toISOString().split('T')[0];
     return (
         <div className={classes.container}>
 
@@ -21,15 +25,15 @@ export const PatientCard = (props) => {
                     </div>
                     <div className={classes.info}>
                         <img src={date} alt='error' />
-                        <p>2000-2-23</p>
+                        <p>{extractedDate}</p>
                     </div>
                     <div className={classes.info}>
                         <img src={id2} alt='error' />
-                        <p>03280052717</p>
+                        <p>{props.data.syrid}</p>
                     </div>
                     <div className={classes.info}>
                         <img src={iphone} alt='error' />
-                        <p>0968955789</p>
+                        <p>{props.data.phone}</p>
                     </div>
                     <div className={classes.info}>
                         <img src={state} alt='error' />
@@ -37,7 +41,7 @@ export const PatientCard = (props) => {
                     </div>
                     <div className={classes.info}>
                         <img src={location} alt='error' />
-                        <p>يبرود حي القاعة</p>
+                        <p>{props.data.address}</p>
                     </div>
 
                 </div>

@@ -7,6 +7,10 @@ import LoadingBar from 'react-top-loading-bar';
 import Change from '../../../style/reset-password.png'
 export const ChangePaswordForm = () => {
     const pattern = /^09[3-9]\d{7}$/;   //for phone
+    function containsSpecialCharacters(str) {
+        var pattern = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/;
+        return pattern.test(str);
+      }
     const [enteredidSyr, setEnteredidSyr] = useState('');
     const [enteredidSyrTouched, setEnteredidSyrTouched] = useState(false);
     const [enteredPhone, setEnteredPhone] = useState('');
@@ -118,13 +122,13 @@ export const ChangePaswordForm = () => {
       
           } finally{
             setIsLoading(false);
-            setEnteredidSyr('');
+            // setEnteredidSyr('');
             setEnteredidSyrTouched(false);
     
-            setEnteredPhone('');
+            // setEnteredPhone('');
             setEnteredPhoneTouched(false);
     
-            setEnteredNewPassword('');
+            // setEnteredNewPassword('');
             setEnteredNewPasswordTouched(false);
           }
 

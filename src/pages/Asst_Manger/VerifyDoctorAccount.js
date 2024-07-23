@@ -8,6 +8,7 @@ import { VerifyCard } from '../../components/Asst_Manger/VerifyDoctorAccount_Fun
 import { Bars } from 'react-loader-spinner';
 import { ButtonVerifyAll } from '../../components/Asst_Manger/VerifyDoctorAccount_Function/ButtonVerifyAll';
 import { ModalForVerifyAll } from '../../components/Asst_Manger/VerifyDoctorAccount_Function/ModalForVerifyAll';
+import { Helmet } from 'react-helmet';
 export const VerifyDoctorAccount = () => {
 
   const [doctors, setdoctors] = useState([]);
@@ -151,7 +152,7 @@ export const VerifyDoctorAccount = () => {
       }
 
       const data = await response.json()
-   console.log(data)
+      console.log(data)
 
       if (data.data.message === 'Confirm Successfully.') {
         toast.success('تم  تأكيد الحساب ', {
@@ -165,7 +166,7 @@ export const VerifyDoctorAccount = () => {
         })
 
         const editDoctor = doctors.filter(item => item.id !== id)
-        
+
         setdoctors(editDoctor)
       }
 
@@ -188,6 +189,7 @@ export const VerifyDoctorAccount = () => {
 
   return (
     <>
+      <Helmet><title>تأكيد حساب فئة طبية</title></Helmet>
 
       <div className='divflex'>
         {
